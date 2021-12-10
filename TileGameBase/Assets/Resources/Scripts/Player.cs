@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Minefield minefield;
+    private Board game;
     private Vector3 mousePos;
 
     // Start is called before the first frame update
     void Start()
     {
-        minefield = FindObjectOfType<Minefield>();
+        game = FindObjectOfType<Board>();
     }
 
     // Update is called once per frame
@@ -17,24 +17,6 @@ public class Player : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Tile t = IsMouseInteraction() ? SelectTile() : null;
         if (t == null) return;
-
-        if (Input.GetMouseButton(1))
-        {
-            if (Input.GetMouseButtonUp(0))
-            {
-                minefield.Chord(t);
-            }
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            minefield.Uncover(t);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (!t.IsCovered()) return;
-            if (!t.IsFlag()) t.Flag(); else t.Deflag();
-        }
     }
 
     private Tile SelectTile()

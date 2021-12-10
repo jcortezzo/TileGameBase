@@ -2,12 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/SweepingMines/[Ll]ibrary/
-/SweepingMines/[Tt]emp/
-/SweepingMines/[Oo]bj/
-/SweepingMines/[Bb]uild/
-/SweepingMines/[Bb]uilds/
-/SweepingMines/[Ll]ogs/
+/TileGameBase/[Ll]ibrary/
+/TileGameBase/[Tt]emp/
+/TileGameBase/[Oo]bj/
+/TileGameBase/[Bb]uild/
+/TileGameBase/[Bb]uilds/
+/TileGameBase/[Ll]ogs/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
