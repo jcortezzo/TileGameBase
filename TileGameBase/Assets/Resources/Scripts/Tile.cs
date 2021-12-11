@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile : Ticable
 {
     [SerializeField] private TileType type = TileType.Empty;
 
     private SpriteRenderer sr;
 
-    public float height { get { return sr.sprite.rect.height; } }
-    public float width { get { return sr.sprite.rect.width; } }
+    public float Height { get { return sr.sprite.rect.height; } }
+    public float Width { get { return sr.sprite.rect.width; } }
+
+    public Ticable Entity { get; set; }
 
     /// <summary>
     /// You can't chain constructors in C#???
@@ -53,5 +55,12 @@ public class Tile : MonoBehaviour
     public void Show()
     {
         sr.enabled = true;
+    }
+
+    public override bool Tic()
+    {
+        base.Tic();
+        Entity?.Tic();
+        return true;
     }
 }

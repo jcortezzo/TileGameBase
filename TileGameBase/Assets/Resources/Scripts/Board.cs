@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +36,27 @@ public class Board : MonoBehaviour
 
         // Adjust after placing mines
         allTiles.ForEach(t => ReevaluateTile(t));
+
+        StartCoroutine(Tic());
+    }
+
+    private IEnumerator Tic()
+    {
+        while (true)
+        {
+            // Make sure everything can Tic
+            foreach (Tile t in allTiles)
+            {
+                t.CanTic = true;
+                if (t.Entity != null) t.Entity.CanTic = true;
+            }
+            yield return new WaitForSeconds(Constants.TIC_TIME);
+            // Tic
+            foreach (Tile t in allTiles)
+            {
+                t.Tic();
+            }
+        }
     }
 
     public void ReevaluateTile(Tile t)
@@ -45,7 +67,7 @@ public class Board : MonoBehaviour
         t.SetTileType(TileType.Empty);
     }
 
-    private List<Tile> GetNeighbors(Tile t)
+    public List<Tile> GetNeighbors(Tile t)
     {
         List<Tile> neighbors = new List<Tile>();
         Constants.DIRECTION_VECTORS2INTS.ForEach(v => {
@@ -56,5 +78,22 @@ public class Board : MonoBehaviour
             }
         });
         return neighbors;
+    }
+
+    public Tile GetTile(Vector2Int vec)
+    {
+        return (board.ContainsKey(vec)) ? board[vec] : null;
+    }
+    
+    public Vector2Int? GetCoords(Tile t)
+    {
+        if (board.ContainsKey(t))
+        {
+            return board[t];
+        }
+        else
+        {
+            return null;
+        }
     }
 }

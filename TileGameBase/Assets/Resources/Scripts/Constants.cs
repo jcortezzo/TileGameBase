@@ -23,4 +23,6 @@ public class Constants
         };
 
     public static float TILE_SIZE { get { return TILE.rect.height; } }
+
+    public const float TIC_TIME = 1f;
 }
